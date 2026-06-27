@@ -9,31 +9,31 @@ AI agent skills collection. Contains OpenSpec workflow skills (propose, design, 
 Install all skills at once (recommended):
 
 ```bash
-npx skills add https://github.com/<your-org>/skills-pool --all
+npx skills add https://github.com/TE-9004076594/skills-pool --all
 ```
 
 Or install to a specific agent only:
 
 ```bash
-npx skills add https://github.com/<your-org>/skills-pool -s '*' -a claude-code
+npx skills add https://github.com/TE-9004076594/skills-pool -s '*' -a claude-code
 ```
 
 Omitting `--all` enters interactive mode where you can toggle individual skills:
 
 ```bash
-npx skills add https://github.com/<your-org>/skills-pool
+npx skills add https://github.com/TE-9004076594/skills-pool
 ```
 
 ### Claude Code
 
 In Claude Code, use the plugin marketplace:
 ```
-/plugin marketplace add <your-org>/skills-pool
+/plugin marketplace add TE-9004076594/skills-pool
 ```
 
 ### Cursor
 
-Settings → Rules → Add Rule → Remote Rule (GitHub) and use `<your-org>/skills-pool`.
+Settings → Rules → Add Rule → Remote Rule (GitHub) and use `TE-9004076594/skills-pool`.
 
 ## Structure
 
