@@ -4,9 +4,9 @@ This repository contains **AI coding skills** for AI coding agents. When editing
 
 ## Repo structure
 
-- **skills/** — Each subdirectory is one skill. The CLI and agents discover skills by scanning `skills/` for directories that contain `SKILL.md`.
-- **Skill directory name** must exactly match the `name` in that skill's frontmatter (e.g. `skills/openspec-propose/` ↔ `name: openspec-propose`).
-- **commands/opsx/** — OpenSpec slash command definitions referenced by the opsx-* skills.
+- **ai-coding/skills/** — Each subdirectory is one skill. The CLI and agents discover skills by scanning `ai-coding/skills/` for directories that contain `SKILL.md`.
+- **Skill directory name** must exactly match the `name` in that skill's frontmatter (e.g. `ai-coding/skills/openspec-propose/` ↔ `name: openspec-propose`).
+- **ai-coding/commands/opsx/** — OpenSpec slash command definitions referenced by the opsx-* skills.
 - **Skills** are grouped into categories:
   - `openspec-*` — OpenSpec structured change management workflow (propose, design, implement, verify, archive, sync)
   - `opsx-*` — Slash-command skills for the OpenSpec workflow (apply, explore, propose, archive, sync, verify, android-bug)
@@ -26,7 +26,7 @@ This repository contains **AI coding skills** for AI coding agents. When editing
 
 - Write descriptions in **third person** (e.g. "Use when…" not "You can use when…").
 - Be concise.
-- When adding a new skill: create `skills/<skill-name>/SKILL.md`, then update `skills/llms.txt` and the README.
+- When adding a new skill: create `ai-coding/skills/<skill-name>/SKILL.md`, then update `ai-coding/skills/llms.txt` and the README.
 
 ## References
 

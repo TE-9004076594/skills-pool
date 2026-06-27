@@ -10,7 +10,7 @@ metadata:
 
 # OPSX: Explore
 
-This skill is a thin wrapper around the [opsx explore command](file://commands/opsx/explore.md). Refer to that file for the complete workflow.
+This skill is a thin wrapper around the [opsx explore command](file://ai-coding/commands/opsx/explore.md). Refer to that file for the complete workflow.
 
 Enter explore mode. Think deeply. Visualize freely.
 
@@ -33,4 +33,4 @@ Enter explore mode. Think deeply. Visualize freely.
 - Use CodeGraph for codebase investigation
 - Offer to capture decisions in artifacts when insights crystallize
 
-See [commands/opsx/explore.md](file://commands/opsx/explore.md) for the full reference.
+See [commands/opsx/explore.md](file://ai-coding/commands/opsx/explore.md) for the full reference.

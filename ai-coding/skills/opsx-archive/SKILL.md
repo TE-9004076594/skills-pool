@@ -10,7 +10,7 @@ metadata:
 
 # OPSX: Archive
 
-This skill is a thin wrapper around the [opsx archive command](file://commands/opsx/archive.md). Refer to that file for the complete workflow.
+This skill is a thin wrapper around the [opsx archive command](file://ai-coding/commands/opsx/archive.md). Refer to that file for the complete workflow.
 
 Archive a completed change in the experimental workflow.
 
@@ -26,4 +26,4 @@ Archive a completed change in the experimental workflow.
 6. **Archive** — `mv "<changeRoot>" "<changesDir>/archive/YYYY-MM-DD-<name>"`
 7. **Show summary**
 
-See [commands/opsx/archive.md](file://commands/opsx/archive.md) for full details.
+See [commands/opsx/archive.md](file://ai-coding/commands/opsx/archive.md) for full details.

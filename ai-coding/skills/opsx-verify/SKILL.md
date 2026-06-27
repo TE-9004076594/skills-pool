@@ -10,7 +10,7 @@ metadata:
 
 # OPSX: Verify
 
-This skill is a thin wrapper around the [opsx verify command](file://commands/opsx/verify.md). Refer to that file for the complete workflow.
+This skill is a thin wrapper around the [opsx verify command](file://ai-coding/commands/opsx/verify.md). Refer to that file for the complete workflow.
 
 Verify a change by running tests, linting, and code quality checks.
 
@@ -27,4 +27,4 @@ Use after `/opsx:apply` to validate that changes compile, pass tests, and meet q
 5. **Run checks** — formatting → clippy → tests → argument-comment lint
 6. **Report results** — structured pass/fail for each check
 
-See [commands/opsx/verify.md](file://commands/opsx/verify.md) for full details.
+See [commands/opsx/verify.md](file://ai-coding/commands/opsx/verify.md) for full details.

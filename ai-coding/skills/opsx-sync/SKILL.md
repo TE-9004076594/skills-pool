@@ -10,7 +10,7 @@ metadata:
 
 # OPSX: Sync
 
-This skill is a thin wrapper around the [opsx sync command](file://commands/opsx/sync.md). Refer to that file for the complete workflow.
+This skill is a thin wrapper around the [opsx sync command](file://ai-coding/commands/opsx/sync.md). Refer to that file for the complete workflow.
 
 Sync delta specs from a change to main specs.
 
@@ -27,4 +27,4 @@ Sync delta specs from a change to main specs.
 5. **Apply changes** — ADDED / MODIFIED / REMOVED / RENAMED requirements
 6. **Show summary**
 
-See [commands/opsx/sync.md](file://commands/opsx/sync.md) for full details.
+See [commands/opsx/sync.md](file://ai-coding/commands/opsx/sync.md) for full details.

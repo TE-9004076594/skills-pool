@@ -10,7 +10,7 @@ metadata:
 
 # OPSX: Apply
 
-This skill is a thin wrapper around the [opsx apply command](file://commands/opsx/apply.md). Refer to that file for the complete workflow.
+This skill is a thin wrapper around the [opsx apply command](file://ai-coding/commands/opsx/apply.md). Refer to that file for the complete workflow.
 
 Implement tasks from an OpenSpec change.
 
@@ -27,4 +27,4 @@ Implement tasks from an OpenSpec change.
 7. **Sync CodeGraph** — `codegraph sync -q`
 8. **Show results** — completion summary or pause reason
 
-See [commands/opsx/apply.md](file://commands/opsx/apply.md) for full details.
+See [commands/opsx/apply.md](file://ai-coding/commands/opsx/apply.md) for full details.

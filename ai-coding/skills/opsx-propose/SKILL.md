@@ -10,7 +10,7 @@ metadata:
 
 # OPSX: Propose
 
-This skill is a thin wrapper around the [opsx propose command](file://commands/opsx/propose.md). Refer to that file for the complete workflow.
+This skill is a thin wrapper around the [opsx propose command](file://ai-coding/commands/opsx/propose.md). Refer to that file for the complete workflow.
 
 Propose a new change — create the change and generate all artifacts in one step.
 
@@ -30,4 +30,4 @@ Artifacts to generate:
 5. **Create artifacts in sequence** — follow instructions from `openspec instructions <artifact-id> --change "<name>" --json`
 6. **Show final status** — `openspec status --change "<name>"`
 
-See [commands/opsx/propose.md](file://commands/opsx/propose.md) for full details.
+See [commands/opsx/propose.md](file://ai-coding/commands/opsx/propose.md) for full details.

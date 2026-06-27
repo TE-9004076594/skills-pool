@@ -4,7 +4,7 @@ This repository contains structured AI coding workflow skills and Android debugg
 
 ## Skills Overview
 
-The `skills/` directory in this repo contains SKILL.md guidance organized into three groups:
+The `ai-coding/skills/` directory in this repo contains SKILL.md guidance organized into three groups:
 
 ### OpenSpec Workflow Skills
 - **openspec-propose** — Create a new change with proposal, design, and task artifacts using OpenSpec CLI

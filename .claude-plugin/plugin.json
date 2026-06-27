@@ -2,5 +2,5 @@
   "name": "ai-coding",
   "description": "AI coding workflow skills for OpenSpec and Android development — propose, design, implement, verify, and archive changes",
   "version": "1.0.0",
-  "skills": "./skills/"
+  "skills": "./ai-coding/skills/"
 }

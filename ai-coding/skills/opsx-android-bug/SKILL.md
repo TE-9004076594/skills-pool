@@ -10,7 +10,7 @@ metadata:
 
 # OPSX: Android Bug
 
-This skill is a thin wrapper around the [opsx android-bug command](file://commands/opsx/android-bug.md). Refer to that file for the complete workflow.
+This skill is a thin wrapper around the [opsx android-bug command](file://ai-coding/commands/opsx/android-bug.md). Refer to that file for the complete workflow.
 
 Investigate and propose a fix for an Android bug. Works like `/opsx:propose` but specialized for Android bug investigation.
 
@@ -26,4 +26,4 @@ Investigate and propose a fix for an Android bug. Works like `/opsx:propose` but
 6. **Create change** — `openspec new change "<bug-name>"`
 7. **Create artifacts** — proposal + design + tasks with Android-specific context
 
-See [commands/opsx/android-bug.md](file://commands/opsx/android-bug.md) for full details.
+See [commands/opsx/android-bug.md](file://ai-coding/commands/opsx/android-bug.md) for full details.
