@@ -6,6 +6,20 @@ AI agent skills collection. Contains OpenSpec workflow skills (propose, design, 
 
 ### npx skills (recommended for Cursor, Claude Code, Codex, Windsurf, Copilot)
 
+Install all skills at once (recommended):
+
+```bash
+npx skills add https://github.com/<your-org>/skills-pool --all
+```
+
+Or install to a specific agent only:
+
+```bash
+npx skills add https://github.com/<your-org>/skills-pool -s '*' -a claude-code
+```
+
+Omitting `--all` enters interactive mode where you can toggle individual skills:
+
 ```bash
 npx skills add https://github.com/<your-org>/skills-pool
 ```
