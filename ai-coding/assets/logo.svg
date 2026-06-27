@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <style>.bg{fill:#2563eb;}.fg{fill:#ffffff;}</style>
+  </defs>
+  <rect class="bg" width="400" height="400" rx="40"/>
+  <g class="fg" transform="translate(80,80)">
+    <rect x="90" y="90" width="60" height="60" rx="8"/>
+    <path d="M110,120 L130,120 M120,110 L120,130" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

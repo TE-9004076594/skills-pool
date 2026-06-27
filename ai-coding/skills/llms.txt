@@ -1,0 +1,30 @@
+# ai-coding — Agent Skills
+
+> AI coding workflow skills for OpenSpec structured change management and Android debugging.
+
+## OpenSpec Workflow Skills
+
+- **openspec-propose**: Propose a new change with proposal, design, and task artifacts using OpenSpec CLI. Triggers: propose new change, create change, new feature planning.
+- **openspec-apply-change**: Implement tasks from an OpenSpec change. Triggers: implement change, apply tasks, start implementation, continue implementation.
+- **openspec-explore**: Explore mode for thinking through ideas, investigating problems, clarifying requirements. Triggers: explore, investigate, think through, analyze problem, research.
+- **openspec-archive-change**: Archive a completed change. Triggers: archive change, complete change, finalize.
+- **openspec-sync-specs**: Sync delta specs from a change to main specs. Triggers: sync specs, update specs, merge specs.
+
+## OPSX Slash-Command Skills
+
+- **opsx-propose**: Propose a new change via `/opsx:propose`. Triggers: /opsx:propose.
+- **opsx-apply**: Implement tasks from a change via `/opsx:apply`. Triggers: /opsx:apply.
+- **opsx-explore**: Enter explore mode via `/opsx:explore`. Triggers: /opsx:explore.
+- **opsx-verify**: Verify a change by running tests and checks via `/opsx:verify`. Triggers: /opsx:verify.
+- **opsx-sync**: Sync delta specs from a change to main specs via `/opsx:sync`. Triggers: /opsx:sync.
+- **opsx-archive**: Archive a completed change via `/opsx:archive`. Triggers: /opsx:archive.
+- **opsx-android-bug**: Investigate Android bugs with specialized triage via `/opsx:android-bug`. Triggers: /opsx:android-bug.
+
+## Android Debugging Skills
+
+- **android-crash-analyzer**: Analyze Android crash logs, identify root cause, narrow suspect code paths. Triggers: crash, crash log, stack trace, exception, SIGSEGV, native crash, ANR.
+- **android-anr-investigator**: Investigate Android ANRs and severe UI stalls. Triggers: ANR, app not responding, UI freeze, main thread block, binder wait, lock contention.
+- **android-lifecycle-debugger**: Debug Android lifecycle-related bugs (Activity, Fragment, ViewModel, process death). Triggers: lifecycle bug, activity lifecycle, fragment lifecycle, state restoration, process death, saved instance state.
+- **android-memory-leak-fixer**: Analyze Android memory leaks and OOM-related retention paths. Triggers: memory leak, OOM, out of memory, GC, heap dump, leak canary, retention path.
+- **android-network-bug-debugger**: Debug Android network-related bugs. Triggers: network error, request failure, auth error, retry loop, timeout, offline, stale data, API error.
+- **android-ui-regression-checker**: Investigate Android UI defects and regression risks (Views and Compose). Triggers: UI bug, layout issue, compose issue, rendering glitch, visual defect, display issue, misalignment.

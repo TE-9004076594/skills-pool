@@ -1,0 +1,26 @@
+{
+  "name": "ai-coding",
+  "version": "1.0.0",
+  "description": "AI coding workflow skills for Cursor, Claude, and other AI agents — OpenSpec structured change management and Android debugging skills",
+  "author": {
+    "name": "ai-coding"
+  },
+  "license": "MIT",
+  "keywords": [
+    "openspec",
+    "workflow",
+    "android",
+    "debugging",
+    "crash-analysis",
+    "anr",
+    "memory-leak",
+    "lifecycle",
+    "propose",
+    "design",
+    "implement",
+    "verify",
+    "archive"
+  ],
+  "logo": "./assets/logo.svg",
+  "skills": ["skills"]
+}
