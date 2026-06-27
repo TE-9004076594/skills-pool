@@ -2,7 +2,59 @@
 
 AI agent skills collection. Contains OpenSpec workflow skills (propose, design, implement, verify, archive), OPSX slash commands, and Android debugging/diagnostics skills.
 
-## Installing
+## Prerequisites
+
+### Node.js
+
+OpenSpec CLI requires **Node.js >= 20.19.0**. Install or upgrade:
+
+```bash
+node --version        # check current version
+```
+
+- **macOS**: `brew install node`
+- **Other**: download from [nodejs.org](https://nodejs.org/)
+
+### OpenSpec CLI
+
+```bash
+npm install -g @fission-ai/openspec@latest
+openspec --version    # verify installation
+```
+
+### CodeGraph CLI
+
+CodeGraph builds a pre-indexed knowledge graph of your codebase for faster agent context retrieval.
+
+**Option 1 — Install script (no Node.js required):**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | sh
+```
+
+**Option 2 — npm (if Node.js already installed):**
+
+```bash
+npm i -g @colbymchenry/codegraph
+```
+
+**Verify and configure:**
+
+```bash
+codegraph --version
+codegraph install     # auto-detect and wire up AI agents
+```
+
+### Project Initialization
+
+After installing OpenSpec CLI, initialize it in your project:
+
+```bash
+cd your-project
+openspec init --tools claude,cursor
+```
+
+## Installing Skills
 
 ### npx skills (recommended for Cursor, Claude Code, Codex, Windsurf, Copilot)
 
@@ -34,6 +86,25 @@ In Claude Code, use the plugin marketplace:
 ### Cursor
 
 Settings → Rules → Add Rule → Remote Rule (GitHub) and use `TE-9004076594/skills-pool`.
+
+## Updating Skills
+
+When skills in this repo are updated (after `git push`), installed users can upgrade:
+
+```bash
+# Update all installed skills
+npx skills update
+
+# Update global or project-level only
+npx skills update -g     # global
+npx skills update -p     # project-level only
+```
+
+To update CodeGraph index after code changes:
+
+```bash
+codegraph sync -q
+```
 
 ## Structure
 
