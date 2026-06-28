@@ -45,6 +45,21 @@ codegraph --version
 codegraph install     # auto-detect and wire up AI agents
 ```
 
+### Platform Installation Guide
+
+| Component | macOS | Windows | Linux |
+|-----------|-------|---------|-------|
+| **Node.js** | `brew install node` | Download `.msi` from [nodejs.org](https://nodejs.org/) | `apt install nodejs` (Debian/Ubuntu) / `dnf install nodejs` (Fedora) |
+| **OpenSpec CLI** | `npm install -g @fission-ai/openspec@latest` | `npm install -g @fission-ai/openspec@latest` | `npm install -g @fission-ai/openspec@latest` |
+| **CodeGraph** (script) | `curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh \| sh` | `irm https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.ps1 \| iex` | `curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh \| sh` |
+| **CodeGraph** (npm) | `npm i -g @colbymchenry/codegraph` | `npm i -g @colbymchenry/codegraph` | `npm i -g @colbymchenry/codegraph` |
+| **npx skills** | `npx skills add https://github.com/TE-9004076594/skills-pool --all` | `npx skills add https://github.com/TE-9004076594/skills-pool --all` | `npx skills add https://github.com/TE-9004076594/skills-pool --all` |
+
+**Key differences:**
+- **macOS/Linux**: `curl` + `sh` for CodeGraph script install; `brew` for Node.js (macOS) or `apt`/`dnf` (Linux)
+- **Windows**: PowerShell `irm` + `iex` for CodeGraph script install; download `.msi` installer for Node.js
+- **npm-based installs** (OpenSpec CLI, CodeGraph npm, npx skills) are identical across all platforms
+
 ### Project Initialization
 
 After installing OpenSpec CLI, initialize it in your project:
