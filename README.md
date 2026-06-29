@@ -172,6 +172,17 @@ Omitting `--all` enters interactive mode where you can toggle individual skills:
 npx skills add https://github.com/TE-9004076594/skills-pool
 ```
 
+> **⚠️ Common error on Windows**: If you see the error below when using the interactive mode:
+> ```
+> ✗ find-skills → PromptScript: PromptScript does not support global skill installation
+> ```
+> **Cause**: The system's built-in `find-skills` skill (PromptScript format) conflicts with global installation.
+> **Fix**: Always use `--all` to skip interactive selection:
+> ```bash
+> npx skills add https://github.com/TE-9004076594/skills-pool --all
+> ```
+> This installs only the skills declared in this repository and avoids the conflict.
+
 ### Claude Code
 
 In Claude Code, use the plugin marketplace:
