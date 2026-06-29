@@ -4,6 +4,18 @@ AI agent skills collection. Contains OpenSpec workflow skills (propose, design, 
 
 ## Prerequisites
 
+### Git
+
+Skills are installed from a Git repository, so Git must be available:
+
+```bash
+git --version        # check if Git is installed
+```
+
+- **macOS**: Included with Xcode Command Line Tools (`xcode-select --install`)
+- **Windows**: Download from [git-scm.com](https://git-scm.com/)
+- **Linux**: `sudo apt install git` (Debian/Ubuntu) / `sudo dnf install git` (Fedora)
+
 ### Node.js
 
 OpenSpec CLI requires **Node.js >= 20.19.0**. Install or upgrade:
@@ -13,7 +25,8 @@ node --version        # check current version
 ```
 
 - **macOS**: `brew install node`
-- **Other**: download from [nodejs.org](https://nodejs.org/)
+- **Windows**: Download `.msi` from [nodejs.org](https://nodejs.org/)
+- **Linux**: `sudo apt install nodejs` (Debian/Ubuntu) / `sudo dnf install nodejs` (Fedora)
 
 ### OpenSpec CLI
 
