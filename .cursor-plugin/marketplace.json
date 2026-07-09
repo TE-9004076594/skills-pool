@@ -1,13 +1,18 @@
 {
-  "name": "ai-coding",
+  "name": "skills-pool",
   "owner": {
-    "name": "ai-coding"
+    "name": "TE-9004076594"
   },
   "plugins": [
     {
       "name": "ai-coding",
-      "source": "./",
-      "description": "AI coding workflow skills for Cursor, Claude, and other AI agents — OpenSpec structured change management (propose, design, implement, verify, archive) and Android debugging skills (crash analysis, ANR investigation, lifecycle debugging, memory leak fixing, network debugging, UI regression checking)."
+      "source": "./ai-coding",
+      "description": "OpenSpec structured change management workflow (propose, design, implement, verify, archive) with OPSX slash commands and Android debugging skills."
+    },
+    {
+      "name": "ai-coding-hyperscale",
+      "source": "./ai-coding-hyperscale",
+      "description": "Hyperscale AI coding workflow skills (coming soon)."
     }
   ]
 }

@@ -1,18 +1,27 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "ai-coding",
-  "description": "AI coding workflow skills for Claude, Cursor, and other AI agents — OpenSpec structured change management (propose, design, implement, verify, archive) and Android debugging skills (crash analysis, ANR investigation, lifecycle debugging, memory leak fixing, network debugging, UI regression checking)",
+  "name": "skills-pool",
+  "description": "AI agent skills collection — multiple skill packages including OpenSpec workflow, OPSX commands, and Android debugging skills",
   "owner": {
-    "name": "ai-coding"
+    "name": "TE-9004076594"
   },
   "plugins": [
     {
       "name": "ai-coding",
-      "description": "AI coding workflow skills covering OpenSpec structured change management and Android debugging — propose, design, implement, verify, and archive changes with structured artifacts, plus specialized Android diagnostics for crashes, ANRs, lifecycle bugs, memory leaks, network issues, and UI regressions",
+      "description": "OpenSpec structured change management workflow (propose, design, implement, verify, archive) with OPSX slash commands and Android debugging skills",
       "author": {
-        "name": "ai-coding"
+        "name": "TE-9004076594"
       },
-      "source": "./",
+      "source": "./ai-coding",
+      "category": "productivity"
+    },
+    {
+      "name": "ai-coding-hyperscale",
+      "description": "Hyperscale AI coding workflow skills (coming soon)",
+      "author": {
+        "name": "TE-9004076594"
+      },
+      "source": "./ai-coding-hyperscale",
       "category": "productivity"
     }
   ]

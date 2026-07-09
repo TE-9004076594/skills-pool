@@ -1,0 +1,13 @@
+{
+  "name": "ai-coding",
+  "owner": {
+    "name": "ai-coding"
+  },
+  "plugins": [
+    {
+      "name": "ai-coding",
+      "source": "./",
+      "description": "AI coding workflow skills for Cursor, Claude, and other AI agents — OpenSpec structured change management (propose, design, implement, verify, archive) and Android debugging skills (crash analysis, ANR investigation, lifecycle debugging, memory leak fixing, network debugging, UI regression checking)."
+    }
+  ]
+}

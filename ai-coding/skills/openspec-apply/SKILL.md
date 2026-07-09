@@ -1,5 +1,5 @@
 ---
-name: openspec-apply-change
+name: openspec-apply
 description: Implement tasks from an OpenSpec change. Use when the user wants to start implementing, continue implementation, or work through tasks.
 license: MIT
 compatibility: Requires openspec CLI.
@@ -52,14 +52,26 @@ Implement tasks from an OpenSpec change.
 
    **Workspace guard:** If status JSON reports `actionContext.mode: "workspace-planning"` and `allowedEditRoots` is empty, explain that full workspace apply is not supported in this slice. Treat linked repos and folders as read-only context, ask the user to select an affected area through an explicit implementation workflow, and STOP before editing files.
 
-4. **Read context files**
+4. **Baseline health check (fail-fast gate)**
+
+   Before reading context and exploring, verify the project currently builds. Iterating on a broken baseline wastes time and creates false-positive test failures.
+
+   - **Gradle wrapper:** `./gradlew :app:assembleDebug` (or the root module affected). Run only on modules that exist.
+   - **Pass** → proceed.
+   - **Fail** → stop, show the compile errors, and ask the user whether to:
+     1. Fix the baseline first (exit apply, fix, come back), or
+     2. Force-continue knowing the baseline is broken (record this risk in the change).
+
+   Skip this gate only if `openspec instructions apply --json` indicated a docs-only change (e.g., spec updates with no code tasks).
+
+5. **Read context files**
 
    Read every file path listed under `contextFiles` from the apply instructions output.
    The files depend on the schema being used:
    - **spec-driven**: proposal, specs, design, tasks
    - Other schemas: follow the contextFiles from CLI output
 
-5. **Explore codebase with CodeGraph**
+6. **Explore codebase with CodeGraph**
 
    Before implementing, use CodeGraph to understand the codebase areas affected by the change:
 
@@ -79,7 +91,26 @@ Implement tasks from an OpenSpec change.
 
    > The codegraph context helps ground implementation in the actual codebase structure, reducing the risk of breaking integrations.
 
-6. **Show current progress**
+7. **Set up Git branch for reviewability**
+
+   Changes produced by apply should be reviewable and traceable. Before editing code:
+
+   a. **Check Git status** — ensure working tree is clean (`git status`). If dirty, warn the user to commit or stash first.
+
+   b. **Create a feature branch** from the current branch (typically `main` or `develop`):
+      ```bash
+      git checkout -b "opsx/<change-name>"
+      ```
+      - Use the change name as the branch suffix (kebab-case)
+      - If the branch already exists, ask whether to reuse it or create a new one with a timestamp suffix
+
+   c. **Commit strategy** — recommend committing after each task (or group of related tasks) so the PR diff is reviewable:
+      - Commit message format: `<type>(<scope>): <description>` (e.g., `feat(auth): add OAuth token refresh`)
+      - Reference the change name in the commit body for traceability: `OpenSpec change: add-user-auth`
+
+   d. **If Git is not available or the user opts out**, note this in the change and proceed — but recommend setting up Git before archive.
+
+8. **Show current progress**
 
    Display:
    - Schema being used
@@ -87,9 +118,17 @@ Implement tasks from an OpenSpec change.
    - Remaining tasks overview
    - Dynamic instruction from CLI
 
-7. **Implement tasks (loop until done or blocked)**
+9. **Implement tasks (loop until done or blocked)**
 
-   For each pending task:
+   Before the first edit, **check parallel-change conflicts**: run `openspec list --json` and, for every other active change, skim its artifact files (`proposal.md` / `tasks.md`) to see if any touches the same modules or source files the current change plans to modify. If a conflict is detected, print an overlap table and ask the user to confirm the order before continuing:
+
+   ```
+   ⚠️ Module conflict detected
+   Module / file       | This change    | Other active change
+   :feature:login       | "add-oauth"    | "rework-auth"
+   ```
+
+   Then, for each pending task:
    - Show which task is being worked on
    - **Use CodeGraph when task is unclear**: If a task's scope or affected areas are ambiguous, run `codegraph explore "<task keywords>"` to get immediate code context
    - Make the code changes required
@@ -103,7 +142,7 @@ Implement tasks from an OpenSpec change.
    - Error or blocker encountered → report and wait for guidance
    - User interrupts
 
-8. **On completion or pause, show status**
+10. **On completion or pause, show status**
 
    Display:
    - Tasks completed this session
@@ -169,9 +208,12 @@ What would you like to do?
 - If implementation reveals issues, pause and suggest artifact updates
 - **Use CodeGraph proactively** - run `codegraph explore` to understand codebase areas before making changes, and when encountering ambiguous tasks
 - Keep code changes minimal and scoped to each task
+- **Add or update tests for behavior changes** - when a task adds/changes behavior, add or update the corresponding unit test in the module's `src/test/...` source set (or instrumented test for UI/integration). Do not mark a behavior task complete without test coverage unless the task is purely non-functional (e.g., docs, rename).
 - Update task checkbox immediately after completing each task
 - Pause on errors, blockers, or unclear requirements - don't guess
 - Use contextFiles from CLI output, don't assume specific file names
+- When tasks are done, recommend running `/opsx:verify` to compile, lint, and run affected-module unit tests before archiving
+- If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual code search.
 
 **Fluid Workflow Integration**
 

@@ -1,6 +1,13 @@
 # skills-pool
 
-AI agent skills collection. Contains OpenSpec workflow skills (propose, design, implement, verify, archive), OPSX slash commands, and Android debugging/diagnostics skills.
+Multi-package AI agent skills collection. Each package is independently versioned and can be installed separately.
+
+**Available packages:**
+
+| Package | Description |
+|---------|-------------|
+| [ai-coding](./ai-coding/) | OpenSpec workflow skills (propose, design, implement, verify, archive), OPSX slash commands, and Android debugging skills |
+| ai-coding-hyperscale | Hyperscale AI coding workflow skills *(coming soon)* |
 
 ## Prerequisites
 
@@ -80,8 +87,8 @@ npm i -g @colbymchenry/codegraph
 openspec --version
 codegraph --version
 
-# Install ai-coding skills
-npx skills add https://github.com/TE-9004076594/skills-pool --all
+# Install a package (e.g. ai-coding)
+npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/ai-coding --all
 ```
 
 </details>
@@ -105,8 +112,8 @@ npm i -g @colbymchenry/codegraph
 openspec --version
 codegraph --version
 
-# Install ai-coding skills
-npx skills add https://github.com/TE-9004076594/skills-pool --all
+# Install a package (e.g. ai-coding)
+npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/ai-coding --all
 ```
 
 </details>
@@ -133,8 +140,8 @@ npm i -g @colbymchenry/codegraph
 openspec --version
 codegraph --version
 
-# Install ai-coding skills
-npx skills add https://github.com/TE-9004076594/skills-pool --all
+# Install a package (e.g. ai-coding)
+npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/ai-coding --all
 ```
 
 </details>
@@ -150,42 +157,36 @@ cd your-project
 openspec init --tools claude,cursor
 ```
 
-## Installing Skills
+## Installing a Package
 
-### npx skills (recommended for Cursor, Claude Code, Codex, Windsurf, Copilot)
+See the package's own README for detailed install instructions:
 
-Install all skills at once (recommended):
+- [ai-coding → Installation](./ai-coding/#installing)
+
+Quick reference:
 
 ```bash
+# Install specific package (recommended)
+npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/ai-coding --all
+
+# Install specific version (via Git tag)
+npx skills add https://github.com/TE-9004076594/skills-pool/tree/ai-coding-v1.0.0/ai-coding --all
+
+# Install entire repo (multi-package selection)
 npx skills add https://github.com/TE-9004076594/skills-pool --all
+
+# Install to specific agent only
+npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/ai-coding -s '*' -a claude-code
 ```
 
-Or install to a specific agent only:
-
-```bash
-npx skills add https://github.com/TE-9004076594/skills-pool -s '*' -a claude-code
-```
-
-Omitting `--all` enters interactive mode where you can toggle individual skills:
-
-```bash
-npx skills add https://github.com/TE-9004076594/skills-pool
-```
-
-> **⚠️ Common error on Windows**: If you see the error below when using the interactive mode:
+> **⚠️ Common error on Windows**: If using interactive mode (without `--all`) shows:
 > ```
 > ✗ find-skills → PromptScript: PromptScript does not support global skill installation
 > ```
-> **Cause**: The system's built-in `find-skills` skill (PromptScript format) conflicts with global installation.
-> **Fix**: Always use `--all` to skip interactive selection:
-> ```bash
-> npx skills add https://github.com/TE-9004076594/skills-pool --all
-> ```
-> This installs only the skills declared in this repository and avoids the conflict.
+> **Fix**: Add `--all` to skip interactive selection.
 
 ### Claude Code
 
-In Claude Code, use the plugin marketplace:
 ```
 /plugin marketplace add TE-9004076594/skills-pool
 ```
@@ -195,8 +196,6 @@ In Claude Code, use the plugin marketplace:
 Settings → Rules → Add Rule → Remote Rule (GitHub) and use `TE-9004076594/skills-pool`.
 
 ## Updating Skills
-
-When skills in this repo are updated (after `git push`), installed users can upgrade:
 
 ```bash
 # Update all installed skills
@@ -213,96 +212,20 @@ To update CodeGraph index after code changes:
 codegraph sync -q
 ```
 
-## Structure
+## Repository Structure
 
 ```
 skills-pool/
-README.md
-LICENSE
-AGENTS.md              # Guidance for AI agents editing this repo
-.github/
-  copilot-instructions.md
-.claude-plugin/        # Claude Code plugin config (discovers ai-coding skills)
-  plugin.json
-  marketplace.json
-.cursor-plugin/        # Cursor plugin config (discovers ai-coding skills)
-  plugin.json
-  marketplace.json
-assets/
-  logo.svg
-
-ai-coding/             # The installable skill package
-  commands/opsx/       # OpenSpec slash command definitions
-    apply.md
-    archive.md
-    explore.md
-    propose.md
-    sync.md
-    verify.md
-    android-bug.md
-
-  skills/
-    llms.txt           # Skill index for agents (names, summaries, triggers)
-
-    # OpenSpec Workflow Skills
-    openspec-propose/
-    openspec-apply-change/
-    openspec-explore/
-    openspec-archive-change/
-    openspec-sync-specs/
-
-    # OPSX Slash-Command Skills (thin wrappers around commands/opsx/)
-    opsx-propose/
-    opsx-apply/
-    opsx-explore/
-    opsx-verify/
-    opsx-sync/
-    opsx-archive/
-    opsx-android-bug/
-
-    # Android Debugging Skills
-    android-crash-analyzer/
-    android-anr-investigator/
-    android-lifecycle-debugger/
-    android-memory-leak-fixer/
-    android-network-bug-debugger/
-    android-ui-regression-checker/
+├── README.md
+├── LICENSE
+├── .claude-plugin/           # Root package registry
+│   └── marketplace.json
+├── .cursor-plugin/           # Root package registry
+│   └── marketplace.json
+├── ai-coding/                # Package: ai-coding
+│   └── README.md
+└── ai-coding-hyperscale/     # Package: coming soon
 ```
-
-## Skills
-
-### OpenSpec Workflow Skills
-
-| Skill | Description |
-|-------|-------------|
-| openspec-propose | Create a new change with proposal, design, and task artifacts using OpenSpec CLI |
-| openspec-apply-change | Implement tasks from an OpenSpec change |
-| openspec-explore | Explore mode for thinking through ideas and investigating problems |
-| openspec-archive-change | Archive a completed change |
-| openspec-sync-specs | Sync delta specs from a change to main specs |
-
-### OPSX Slash Commands
-
-| Command | Description |
-|---------|-------------|
-| `/opsx:propose` | Propose a new change |
-| `/opsx:apply` | Implement tasks from a change |
-| `/opsx:explore` | Enter explore mode |
-| `/opsx:verify` | Run tests and checks |
-| `/opsx:sync` | Sync delta specs |
-| `/opsx:archive` | Archive a completed change |
-| `/opsx:android-bug` | Investigate Android bugs with OpenSpec |
-
-### Android Debugging Skills
-
-| Skill | Description |
-|-------|-------------|
-| android-crash-analyzer | Analyze Android crash logs and find root cause |
-| android-anr-investigator | Investigate ANRs and UI stalls |
-| android-lifecycle-debugger | Debug lifecycle-related bugs |
-| android-memory-leak-fixer | Analyze memory leaks and retention paths |
-| android-network-bug-debugger | Debug network-related bugs |
-| android-ui-regression-checker | Investigate UI defects and regressions |
 
 ## License
 

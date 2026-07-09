@@ -22,5 +22,5 @@
     "archive"
   ],
   "logo": "./assets/logo.svg",
-  "skills": ["ai-coding/skills"]
+  "skills": ["skills"]
 }

@@ -5,10 +5,13 @@
 ## OpenSpec Workflow Skills
 
 - **openspec-propose**: Propose a new change with proposal, design, and task artifacts using OpenSpec CLI. Triggers: propose new change, create change, new feature planning.
-- **openspec-apply-change**: Implement tasks from an OpenSpec change. Triggers: implement change, apply tasks, start implementation, continue implementation.
+- **openspec-apply**: Implement tasks from an OpenSpec change. Triggers: implement change, apply tasks, start implementation, continue implementation.
 - **openspec-explore**: Explore mode for thinking through ideas, investigating problems, clarifying requirements. Triggers: explore, investigate, think through, analyze problem, research.
-- **openspec-archive-change**: Archive a completed change. Triggers: archive change, complete change, finalize.
+- **openspec-archive**: Archive a completed change. Triggers: archive change, complete change, finalize.
 - **openspec-sync-specs**: Sync delta specs from a change to main specs. Triggers: sync specs, update specs, merge specs.
+- **openspec-android-bug**: Investigate and propose a fix for an Android bug using OpenSpec workflow. Triggers: android bug, crash report, bug investigation, triage.
+- **openspec-trace-logger**: Temporary diagnostic probe — instrument call chain with structured logs, collect runtime evidence. Triggers: trace, debug log, runtime diagnosis, call chain.
+- **openspec-verify**: Verify an OpenSpec change by running tests, linting, and code quality checks. Triggers: verify change, run tests, lint check, code quality.
 
 ## OPSX Slash-Command Skills
 
@@ -19,6 +22,7 @@
 - **opsx-sync**: Sync delta specs from a change to main specs via `/opsx:sync`. Triggers: /opsx:sync.
 - **opsx-archive**: Archive a completed change via `/opsx:archive`. Triggers: /opsx:archive.
 - **opsx-android-bug**: Investigate Android bugs with specialized triage via `/opsx:android-bug`. Triggers: /opsx:android-bug.
+- **opsx-trace-log**: Temporary diagnostic probe via `/opsx:trace-log` — instrument call chains with structured logs. Triggers: /opsx:trace-log.
 
 ## Android Debugging Skills
 
@@ -28,3 +32,5 @@
 - **android-memory-leak-fixer**: Analyze Android memory leaks and OOM-related retention paths. Triggers: memory leak, OOM, out of memory, GC, heap dump, leak canary, retention path.
 - **android-network-bug-debugger**: Debug Android network-related bugs. Triggers: network error, request failure, auth error, retry loop, timeout, offline, stale data, API error.
 - **android-ui-regression-checker**: Investigate Android UI defects and regression risks (Views and Compose). Triggers: UI bug, layout issue, compose issue, rendering glitch, visual defect, display issue, misalignment.
+- **android-camera-bugfix-skill**: Diagnose and fix Android camera issues — open failures, preview, capture, Camera2/CameraX. Triggers: camera bug, preview black, capture failed, camera open error.
+- **android-gallery-bugfix-skill**: Diagnose and fix Android gallery, photo-picker, MediaStore, and image-loading issues. Triggers: gallery bug, photo picker, MediaStore, image load failure, save delete photo.

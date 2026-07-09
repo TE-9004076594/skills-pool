@@ -1,5 +1,5 @@
 ---
-name: openspec-archive-change
+name: openspec-archive
 description: Archive a completed change in the experimental workflow. Use when the user wants to finalize and archive a change after implementation is complete.
 license: MIT
 compatibility: Requires openspec CLI.
@@ -53,7 +53,17 @@ Archive a completed change in the experimental workflow.
 
    **If no tasks file exists:** Proceed without task-related warning.
 
-4. **Assess delta spec sync state**
+4. **Verify build gate (fail-soft)**
+
+   A change should not be archived on a broken branch. Before archiving:
+   - Run `openspec status --change "<name>" --json` and check whether a `/opsx:verify` session completed successfully within the conversation (look for a `Verification Report` section or a `status: "done"` marker for affected modules).
+   - If no verify report exists or the last report shows failures, prompt the user:
+     - **"Run `/opsx:verify` first (recommended)"** - compile + lint + unit tests before archiving
+     - **"Skip verify and archive anyway (record risk)"** - archive but note in the summary that verification was not completed
+
+   This gate exists because iteration and bugfix workflows commonly skip the final check — the archive becomes the last record, and a broken branch archived this way silently contaminates future work.
+
+5. **Assess delta spec sync state**
 
    Use `artifactPaths.specs.existingOutputPaths` from status JSON to check for delta specs. If none exist, proceed without sync prompt.
 
@@ -68,7 +78,7 @@ Archive a completed change in the experimental workflow.
 
    If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke openspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
 
-5. **Capture CodeGraph snapshot of affected code**
+6. **Capture CodeGraph snapshot of affected code**
 
    Before archiving, use CodeGraph to capture what code was affected by this change:
 
@@ -86,7 +96,60 @@ Archive a completed change in the experimental workflow.
 
    > The codegraph snapshot is included in the archive summary to preserve context about what code was affected.
 
-6. **Perform the archive**
+7. **Generate PR summary and optionally create PR**
+
+   Archive is the final record of a change. Generate a pull-request-ready summary from the OpenSpec artifacts:
+
+   a. **Collect change metadata**:
+      - Read `proposal.md` for the motivation and scope
+      - Read `design.md` for technical decisions
+      - Read `tasks.md` for what was implemented
+      - Run `git log --oneline main..HEAD` (or the base branch) to list commits on the feature branch
+
+   b. **Generate a PR description** and write it to `<changeRoot>/PR.md`:
+      ```markdown
+      ## <Change Title>
+
+      **OpenSpec change:** <change-name>
+      **Schema:** <schema-name>
+      **Branch:** opsx/<change-name>
+
+      ### What
+      <one-paragraph summary from proposal.md>
+
+      ### Why
+      <motivation from proposal.md>
+
+      ### How
+      <brief technical approach from design.md>
+
+      ### Changes
+      - <file>: <what changed>
+      - ...
+
+      ### Verification
+      - [ ] Unit tests added / updated
+      - [ ] `/opsx:verify` passed (compile + lint + tests)
+      - [ ] Bug: reproduction steps no longer trigger
+      - [ ] Bug: regression test added
+
+      ### Commits
+      <output of git log --oneline base..HEAD>
+
+      ### OpenSpec Artifacts
+      - proposal: <path>
+      - design: <path>
+      - tasks: <path>
+      - Archive: <archive-location>
+      ```
+
+   c. **Optionally create the PR** if `gh` CLI is available:
+      ```bash
+      gh pr create --title "<change title>" --body-file <changeRoot>/PR.md --base main
+      ```
+      If the user declines or `gh` is unavailable, just inform them the PR description is at `<changeRoot>/PR.md`.
+
+8. **Perform the archive**
 
    Create an `archive` directory under `planningHome.changesDir` if it doesn't exist:
    ```bash
@@ -103,7 +166,7 @@ Archive a completed change in the experimental workflow.
    mv "<changeRoot>" "<planningHome.changesDir>/archive/YYYY-MM-DD-<name>"
    ```
 
-7. **Display summary with CodeGraph context**
+9. **Display summary with CodeGraph context**
 
    Show archive completion summary including:
    - Change name
@@ -135,3 +198,4 @@ All artifacts complete. All tasks complete.
 - Show clear summary of what happened
 - If sync is requested, use openspec-sync-specs approach (agent-driven)
 - If delta specs exist, always run the sync assessment and show the combined summary before prompting
+- If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual code search.
