@@ -112,3 +112,28 @@ Provide:
 - weak-referencing every field blindly
 - clearing references before UI lifecycle truly ends
 - keeping hidden static caches without limits
+
+## CodeGraph Integration
+
+CodeGraph helps trace retention paths and identify leak patterns in the codebase.
+
+**When to run CodeGraph**:
+- During step 1 (identify retained object) — explore the suspected leaked class and its references
+- During step 2 (walk the retention path) — use CodeGraph to find all references to the retained object
+- During step 3 (classify the leak) — understand the reference chain structure
+
+```bash
+codegraph explore "<leaked class or suspected holder>"
+```
+
+**What to look for from CodeGraph results**:
+- **Static references**: `companion object`, static fields, singleton patterns holding references
+- **Listener/callback registrations**: `addListener`, `addObserver`, event bus subscriptions not removed
+- **Anonymous/inner class references**: non-static inner classes, lambdas capturing outer class instances
+- **Coroutine scope leaks**: coroutine `launch` in Activity/Fragment without proper scope cancellation
+- **Cached collections**: static LruCache, HashMap, or lists that grow unbounded
+- **View references**: Fragment views retained after `onDestroyView`, adapter references to old context
+
+**Scope note**: CodeGraph does not reliably index Gradle build scripts or ProGuard rules. For memory issues involving dependency versions or obfuscation that masks leak sources, supplement with `rg`/`find` on `build.gradle` and `proguard-rules.pro`.
+
+**Fallback**: If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual retention-path search.

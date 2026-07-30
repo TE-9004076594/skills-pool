@@ -145,3 +145,27 @@ Respond with these sections:
 - catching `Exception` around the whole screen
 - retry loops without state correction
 - "works on my device" conclusions without lifecycle review
+
+## CodeGraph Integration
+
+CodeGraph helps ground crash diagnosis in the actual codebase structure. Run it before proposing a fix.
+
+**When to run CodeGraph**:
+- During step 4 (root-cause hypothesis) — explore the crash site and related call paths
+- During step 5 (locate suspect code) — use CodeGraph to find all callers and callees of the crashing method
+- After classifying the crash type, refine the fix scope with CodeGraph
+
+```bash
+codegraph explore "<crash class or method>"
+```
+
+**What to look for from CodeGraph results**:
+- **Upstream callers**: who invokes the method that crashed (could reveal null arguments, bad state)
+- **Downstream callees**: what the method calls (could reveal where the actual exception originates)
+- **Async boundaries**: coroutine launch points, callback registrations crossing lifecycle boundaries
+- **State owners**: which ViewModel/state holder owns the data involved in the crash
+- **Lifecycle hooks**: whether the crash path crosses `onDestroy` boundaries
+
+**Scope note**: CodeGraph does not reliably index XML layouts, `AndroidManifest.xml`, or Gradle build scripts. For crashes involving resource lookups, manifest-declared components, or dependency version issues, supplement with `rg`/`find`. Also scan `settings.gradle` for multi-module dependencies on the affected module.
+
+**Fallback**: If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual crash-site search.

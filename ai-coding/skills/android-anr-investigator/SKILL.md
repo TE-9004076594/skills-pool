@@ -130,3 +130,27 @@ Provide:
 - moving everything to background without lifecycle ownership
 - increasing timeouts without analysis
 - keeping startup "synchronous for simplicity"
+
+## CodeGraph Integration
+
+CodeGraph helps identify the blocking call and its call chain during ANR investigation.
+
+**When to run CodeGraph**:
+- During step 2 (inspect main thread state) — locate the blocking method in the source tree
+- During step 3 (correlate with app code) — find all callers and the async/dispatcher context
+- During step 4 (classify root cause) — understand the full call chain leading to the block
+
+```bash
+codegraph explore "<suspected blocking class or method>"
+```
+
+**What to look for from CodeGraph results**:
+- **Callers on main thread**: who invokes the blocking method from the UI thread
+- **Async dispatchers**: whether the work runs on `Dispatchers.IO`, `Dispatchers.Main`, or a custom dispatcher
+- **Lock contention**: static locks, shared resources, synchronized blocks in the call chain
+- **Binder call sites**: AIDL/IPC calls that may block the main thread
+- **Disk/network access**: file I/O, database queries, network requests visible in the call graph
+
+**Scope note**: CodeGraph does not reliably index `AndroidManifest.xml` (broadcast receivers, services) or Gradle build scripts. For ANRs involving manifest-declared components or dependency version mismatches, supplement with `rg`/`find`.
+
+**Fallback**: If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual blocking-call search.

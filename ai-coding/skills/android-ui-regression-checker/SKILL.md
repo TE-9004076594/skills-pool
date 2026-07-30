@@ -118,3 +118,29 @@ Always include:
 - duplicate state across adapter/viewmodel/view
 - full-list refresh when targeted update is enough
 - recomposition-trigger loops from unstable state
+
+## CodeGraph Integration
+
+CodeGraph helps identify the rendering path, state sources, and view binding code.
+
+**When to run CodeGraph**:
+- During step 2 (inspect rendering path) — explore the Composable function, View binding, or adapter code
+- During step 3 (check device-specific factors) — find resource qualifier usage, theme references
+- During step 4 (recommend fix) — understand the full data-to-render pipeline
+
+```bash
+codegraph explore "<Composable, View class, or adapter>"
+```
+
+**What to look for from CodeGraph results**:
+- **State-to-UI mapping**: ViewModel state collectors, `collectAsState`, adapter data sets
+- **Compose stability**: `@Stable`/`@Immutable` annotations, lambda stability in composable params
+- **Recomposition boundaries**: `remember`, `derivedStateOf`, `snapshotFlow` usage
+- **Adapter binding**: `onBindViewHolder`, `DiffUtil`, `ListAdapter` submission logic
+- **Layout inflation**: `onCreateView`, `onCreateDialog`, custom `LayoutInflater` usage
+- **Resource references**: theme attributes, dimension resources, color state lists used by the view
+- **Click/interaction handlers**: `setOnClickListener`, `Modifier.clickable`, touch delegation
+
+**Scope note**: CodeGraph does not reliably index `res/layout/*.xml`, `res/values/*.xml`, `res/drawable/*.xml`, or AndroidManifest.xml (theme declarations, config changes). For UI bugs rooted in layout XML, theme inheritance, or resource qualifiers, supplement with `rg`/`find` on the `res/` directory.
+
+**Fallback**: If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual UI code search.

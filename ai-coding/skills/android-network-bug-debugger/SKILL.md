@@ -123,3 +123,29 @@ Include:
 - multiple refresh attempts racing
 - retry loops without cap
 - parsing with overly strict assumptions when API evolves
+
+## CodeGraph Integration
+
+CodeGraph helps trace network request lifecycles, data flow, and error handling paths.
+
+**When to run CodeGraph**:
+- During step 2 (trace request lifecycle) — explore the request initiation, interceptors, and response handling
+- During step 3 (look for common bugs) — find auth token flows, retry logic, caching layers
+- During step 4 (recommend fix) — verify the full request/response data path
+
+```bash
+codegraph explore "<repository, API service, or interceptor class>"
+```
+
+**What to look for from CodeGraph results**:
+- **Request initiation**: ViewModel/Repository methods that call the API service
+- **Auth/interceptor chain**: OkHttp interceptors, token refresh logic, header injection
+- **Response handling**: JSON parsing, model mapping, error type conversion
+- **Caching layer**: Room cache, in-memory cache, DataStore updates after network response
+- **Retry logic**: `retryWhen`, `retry`, custom retry loops, exponential backoff
+- **Cancellation**: coroutine cancellation handling, `onCleared` disposal of in-flight requests
+- **Timeout configuration**: OkHttp client builder, per-call timeouts, connection pool settings
+
+**Scope note**: CodeGraph does not reliably index AndroidManifest.xml (network permissions, `network_security_config`), Gradle build scripts (OkHttp/Retrofit dependency versions), or XML resource files (base URLs in string resources). For network bugs involving manifest config or build dependencies, supplement with `rg`/`find` on `AndroidManifest.xml` and `build.gradle`.
+
+**Fallback**: If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual request-flow search.

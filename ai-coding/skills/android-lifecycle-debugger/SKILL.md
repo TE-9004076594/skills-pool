@@ -129,3 +129,28 @@ Always include:
 - collecting in wrong scope
 - updating views from callbacks after view destruction
 - navigation calls without destination/state checks
+
+## CodeGraph Integration
+
+CodeGraph helps trace lifecycle-related code paths, state owners, and async callbacks.
+
+**When to run CodeGraph**:
+- During step 2 (identify state owner) — explore which class owns the state involved
+- During step 3 (inspect async work) — find coroutine scopes, callback registrations, and their lifecycle bindings
+- During step 4 (find lifecycle mismatch) — trace whether async work outlives its lifecycle owner
+
+```bash
+codegraph explore "<lifecycle owner class or callback method>"
+```
+
+**What to look for from CodeGraph results**:
+- **Lifecycle owners**: Activity, Fragment, ViewModel, custom scope holders
+- **Async callback sites**: coroutine `launch`/`async`, Rx subscriptions, `Handler.post`, `addCallback` registrations
+- **Scope bindings**: whether the coroutine scope is `viewModelScope`, `lifecycleScope`, or a custom scope
+- **Cleanup points**: `onDestroyView`, `onCleared`, `DisposableHandle`, `Closeable` implementations
+- **State restoration**: `SavedStateHandle`, `onSaveInstanceState` call sites, ViewModel state holders
+- **Observer/collector lifecycles**: `collectAsState`, `observe`, `addObserver` — whether they are properly scoped
+
+**Scope note**: CodeGraph does not reliably index XML layouts (data bindings, view IDs) or `AndroidManifest.xml` (`configChanges`, process death config). For lifecycle bugs involving configuration changes or process death restoration, supplement with `rg`/`find` on `AndroidManifest.xml` and layout files.
+
+**Fallback**: If `codegraph explore` returns no meaningful results, proceed without it — CodeGraph is an enhancement, not a blocker. Fall back to `rg`/grep for manual lifecycle call-site search.
