@@ -168,6 +168,26 @@ When the change is ready, use openspec-apply to implement, openspec-sync-specs t
 
    > The codegraph findings will be used when creating proposal and design artifacts.
 
+4b. **Retrieve CodeKB bug patterns & design intent** (if CodeKB is initialized)
+
+   Bug investigation benefits from historical defect patterns and design intent:
+
+   ```bash
+   # Search bug patterns related to the symptom (bug-pattern type is auto-boosted)
+   codekb_search("<bug symptom keywords>", { knowledge_types: ["bug-pattern", "decision"] })
+
+   # Explain suspect symbols to surface known issues and conventions
+   codekb_explain("<suspect class or method>")
+   ```
+
+   **What to look for**:
+   - **`known_issues`** — historical bug patterns attached to the suspect symbol (severity-sorted); the fix must not reintroduce them
+   - **Design intent** — why the module was designed this way; compare current code against the intent to detect violations
+   - **Coding conventions** — the fix should respect project conventions (e.g., thread-safety, error handling)
+   - **`codekb_ask("<module> 的设计意图是什么")`** — when the module design rationale is unclear
+
+   Carry findings into the OpenSpec contract (step 3) as constraints and into the design artifact.
+
 5. **Create the change directory**
    ```bash
    openspec new change "<bug-name>"

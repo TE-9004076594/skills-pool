@@ -23,6 +23,15 @@
       },
       "source": "./ai-coding-hyperscale",
       "category": "productivity"
+    },
+    {
+      "name": "codekb",
+      "description": "Source code semantic knowledge base — hybrid code retrieval (structural + vector + BM25), LLM knowledge extraction, RAG Q&A, and OpenSpec workflow integration",
+      "author": {
+        "name": "TE-9004076594"
+      },
+      "source": "./codekb",
+      "category": "productivity"
     }
   ]
 }

@@ -13,6 +13,11 @@
       "name": "ai-coding-hyperscale",
       "source": "./ai-coding-hyperscale",
       "description": "Hyperscale AI coding workflow skills (coming soon)."
+    },
+    {
+      "name": "codekb",
+      "source": "./codekb",
+      "description": "Source code semantic knowledge base — hybrid code retrieval, LLM knowledge extraction, RAG Q&A, and OpenSpec workflow integration."
     }
   ]
 }

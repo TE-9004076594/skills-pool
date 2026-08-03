@@ -1,0 +1,6 @@
+{
+  "name": "codekb",
+  "description": "CodeKB — source code semantic knowledge base: hybrid code retrieval (structural + vector + BM25), LLM knowledge extraction, RAG Q&A, and OpenSpec workflow integration",
+  "version": "0.1.0",
+  "skills": "./skills/"
+}

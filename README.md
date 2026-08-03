@@ -7,6 +7,7 @@ Multi-package AI agent skills collection. Each package is independently versione
 | Package | Description |
 |---------|-------------|
 | [ai-coding](./ai-coding/) | OpenSpec workflow skills (propose, design, implement, verify, archive), OPSX slash commands, and Android debugging skills |
+| [codekb](./codekb/) | 源码语义知识库 — 混合代码检索 + LLM 知识提取 + RAG 问答 + OpenSpec 工作流集成 |
 | ai-coding-hyperscale | Hyperscale AI coding workflow skills *(coming soon)* |
 
 ## Prerequisites
@@ -224,6 +225,10 @@ skills-pool/
 │   └── marketplace.json
 ├── ai-coding/                # Package: ai-coding
 │   └── README.md
+├── codekb/                   # Package: CodeKB 源码语义知识库
+│   ├── src/                  #   CLI + MCP Server + 索引/提取/检索
+│   ├── skills/               #   codekb-* 技能
+│   └── package.json
 └── ai-coding-hyperscale/     # Package: coming soon
 ```
 

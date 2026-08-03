@@ -1,0 +1,20 @@
+{
+  "name": "codekb",
+  "version": "0.1.0",
+  "description": "CodeKB — source code semantic knowledge base: hybrid code retrieval, LLM knowledge extraction, RAG Q&A, and OpenSpec workflow integration",
+  "author": {
+    "name": "TE-9004076594"
+  },
+  "license": "MIT",
+  "keywords": [
+    "codekb",
+    "knowledge-base",
+    "code-index",
+    "rag",
+    "openspec",
+    "codegraph",
+    "semantic-search",
+    "bug-pattern"
+  ],
+  "skills": ["skills"]
+}

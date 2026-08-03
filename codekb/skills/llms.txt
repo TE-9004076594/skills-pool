@@ -1,0 +1,12 @@
+# codekb — Agent Skills
+
+> Source code semantic knowledge base: hybrid retrieval, knowledge extraction, RAG Q&A, OpenSpec integration.
+
+## CodeKB Skills
+
+- **codekb-init**: Initialize CodeKB knowledge base — index code (tree-sitter chunking + vector + BM25), extract initial knowledge, install Git hooks. Triggers: initialize codekb, setup knowledge base, first index, project memory.
+- **codekb-search**: Hybrid code search (structural + semantic + lexical with RRF fusion). Triggers: find code, search implementation, where is handled, locate symbol, semantic search.
+- **codekb-explain**: Explain a symbol — functional summary, knowledge, known bug patterns, call graph, conventions. Triggers: explain symbol, understand function, modify class, impact check, known issues.
+- **codekb-extract**: Extract knowledge via five LLM extractors (pattern/decision/rule/convention/bug-pattern). Triggers: extract knowledge, mine decisions, detect architecture pattern, bug pattern extraction, from-change.
+- **codekb-review**: Review knowledge entries — confirm/reject/edit, manage confidence and status. Triggers: review knowledge, confirm entry, reject entry, low confidence, audit knowledge base.
+- **codekb-ask**: Natural language Q&A about the project (RAG with source traceability). Triggers: why is this done, how does system handle, project question, design intent, code behavior.
