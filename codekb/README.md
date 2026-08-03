@@ -20,8 +20,11 @@
 ## 安装
 
 ```bash
-# 安装 CodeKB CLI（全局）
-cd codekb
+# 方式一：npm 全局安装（发布到 registry 后）
+npm install -g @yun918/codekb
+
+# 方式二：从仓库源码本地安装（开发调试）
+cd skills-pool/codekb
 npm install
 npm install -g .
 
@@ -35,9 +38,9 @@ MCP Server 配置（初始化后打印）：
 { "mcpServers": { "codekb": { "command": "codekb", "args": ["mcp"], "env": { "CODEKB_PROJECT": "<project-path>" } } } }
 ```
 
-## 发布到 npm（npm install -g codekb）
+## 发布到 npm（npm install -g @yun918/codekb）
 
-`codekb` 包名在 npm registry 可用，支持标准 npm 全局安装。
+`@yun918/codekb` 是 scoped 包名，支持标准 npm 全局安装。
 
 ### 一次发布（只需做一次）
 
@@ -47,14 +50,17 @@ MCP Server 配置（初始化后打印）：
 > npm publish --registry=https://registry.npmjs.org/
 > ```
 
+> **⚠️ 发布前提**：npm 要求发布包账号必须开启 **2FA**（双因素认证）。未开启 2FA 时 `npm publish` 报 403。请先在 https://www.npmjs.com/settings/yun918/2fa 开启，然后在 [Access Tokens](https://www.npmjs.com/settings/yun918/tokens) 生成 **Granular Access Token**（Read and write 权限），配置：`npm config set //registry.npmjs.org/:_authToken=新token`。
+
 ```bash
-# 1. 注册 npm 账号（若没有）：https://www.npmjs.com/signup
-# 2. 在 codekb 目录下登录（项目级 .npmrc 已指向官方 registry）
+# 1. 在 codekb 目录下登录（项目级 .npmrc 已指向官方 registry）
 cd codekb
 npm login
+npm whoami        # 确认显示 yun918
 
-# 3. 发布
-npm publish
+# 2. 发布（scoped 包需声明 public）
+npm publish --access public
+# 如提示 OTP: npm publish --access public --otp=<验证码>
 ```
 
 ### 发布新版本（每次更新）
@@ -73,17 +79,17 @@ npm publish
 
 ```bash
 # 全局安装（推荐）
-npm install -g codekb
+npm install -g @yun918/codekb
 
 # 或项目内安装
-npm install codekb
+npm install @yun918/codekb
 ```
 
 ### 打包内容验证
 
 ```bash
 npm pack --dry-run   # 预览发布内容，确认无 node_modules
-npm view codekb      # 发布后验证 registry 可见
+npm view @yun918/codekb   # 发布后验证 registry 可见
 ```
 
 > **注意**：`files` 字段已配置，只打包 `bin/`、`src/`、`skills/`、插件配置和 README。`node_modules/`、`index/`、测试目录不会进入发布包。

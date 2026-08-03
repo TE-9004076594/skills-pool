@@ -196,6 +196,71 @@ npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/ai-coding 
 
 Settings → Rules → Add Rule → Remote Rule (GitHub) and use `TE-9004076594/skills-pool`.
 
+## CodeKB 安装与使用
+
+### 1. 安装 CodeKB CLI（npm 全局安装）
+
+```bash
+npm install -g @yun918/codekb
+codekb --version    # 验证安装
+```
+
+### 2. 初始化项目知识库
+
+```bash
+cd your-project
+codekb init
+```
+
+- 创建 `codekb/codekb.yaml` 配置 + `codekb/knowledge/` 知识库
+- 构建向量 + BM25 混合索引
+- 自动安装 Git hook（commit 后增量同步）
+- 可选：安装 `node-tree-sitter`、`@lancedb/lancedb` 获得 AST 分块和 LanceDB 向量检索（未安装时自动降级）
+
+### 3. 配置 MCP Server（AI 编码工具接入）
+
+`codekb init` 会打印 MCP 配置，添加到你的 AI 编码工具：
+
+```json
+{
+  "mcpServers": {
+    "codekb": {
+      "command": "codekb",
+      "args": ["mcp"],
+      "env": { "CODEKB_PROJECT": "/path/to/your-project" }
+    }
+  }
+}
+```
+
+### 4. 日常使用
+
+```bash
+# 代码变更后手动同步（Git hook 会自动执行）
+codekb sync
+
+# 知识提取（五类：pattern/decision/rule/convention/bug-pattern）
+codekb extract --scope src/payment
+
+# OpenSpec archive 阶段知识反哺
+codekb extract --from-change <change-name>
+
+# 浏览/审阅知识条目
+codekb list --type decision
+codekb review decision-001 confirm
+
+# 索引健康状态
+codekb status
+```
+
+AI 编码时通过 MCP 工具使用：`codekb_search`（混合检索）、`codekb_explain`（符号解释）、`codekb_ask`（RAG 问答）、`codekb_conventions`（编码约定）。
+
+### 5. 安装 codekb 技能（可选，npx skills）
+
+```bash
+npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/codekb --all
+```
+
 ## Updating Skills
 
 ```bash
