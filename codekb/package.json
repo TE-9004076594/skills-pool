@@ -1,6 +1,6 @@
 {
   "name": "@yun918/codekb",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CodeKB — 源码语义知识库。从源码中提取架构模式、设计决策、业务规则、编码约定、缺陷模式，支持自然语言混合检索与 OpenSpec 工作流集成。",
   "type": "module",
   "bin": {

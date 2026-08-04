@@ -10,3 +10,4 @@
 - **codekb-extract**: Extract knowledge via five LLM extractors (pattern/decision/rule/convention/bug-pattern). Triggers: extract knowledge, mine decisions, detect architecture pattern, bug pattern extraction, from-change.
 - **codekb-review**: Review knowledge entries — confirm/reject/edit, manage confidence and status. Triggers: review knowledge, confirm entry, reject entry, low confidence, audit knowledge base.
 - **codekb-ask**: Natural language Q&A about the project (RAG with source traceability). Triggers: why is this done, how does system handle, project question, design intent, code behavior.
+- **openspec-codekb-integration**: Optional enhancement — enrich OpenSpec workflow stages (explore/propose/apply/archive/android-bug) with CodeKB knowledge. ONLY active when CodeKB installed + initialized. Triggers: openspec codekb, integrate codekb, archive knowledge feedback, constraint association.

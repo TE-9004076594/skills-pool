@@ -261,6 +261,14 @@ AI 编码时通过 MCP 工具使用：`codekb_search`（混合检索）、`codek
 npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/codekb --all
 ```
 
+### 6. 与 OpenSpec 解耦
+
+CodeKB 是**可选增强层**，与 OpenSpec + CodeGraph 完全解耦：
+
+- **不安装 CodeKB** → `openspec-*` 技能 + CodeGraph 照常工作，无任何 CodeKB 参与
+- **安装 CodeKB** → 通过随包附带的 `openspec-codekb-integration` 技能，在 explore/propose/apply/archive/android-bug 各阶段获得语义增强
+- OpenSpec 工作流**永不**被 CodeKB 阻塞
+
 ## Updating Skills
 
 ```bash
@@ -292,8 +300,9 @@ skills-pool/
 │   └── README.md
 ├── codekb/                   # Package: CodeKB 源码语义知识库
 │   ├── src/                  #   CLI + MCP Server + 索引/提取/检索
-│   ├── skills/               #   codekb-* 技能
-│   └── package.json
+│   ├── skills/               #   7 个技能（6 codekb-* + openspec-codekb-integration）
+│   ├── package.json
+│   └── README.md
 └── ai-coding-hyperscale/     # Package: coming soon
 ```
 

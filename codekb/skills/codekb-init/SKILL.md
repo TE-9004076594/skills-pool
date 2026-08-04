@@ -2,7 +2,7 @@
 name: codekb-init
 description: Initialize CodeKB knowledge base in a project — index code with tree-sitter chunking, build vector + BM25 hybrid index, optionally extract knowledge. Use when starting to work with an unfamiliar codebase or enabling project memory for AI.
 license: MIT
-compatibility: Requires codekb CLI (`npm install -g ./codekb`). Detects CodeGraph; degrades gracefully when absent.
+compatibility: Requires codekb CLI (`npm install -g @yun918/codekb`). Detects CodeGraph; degrades gracefully when absent.
 metadata:
   author: ai-coding
   version: "1.0"
@@ -21,9 +21,14 @@ Initialize the CodeKB semantic knowledge base for a project.
 ## Prerequisites
 
 ```bash
-# Install CodeKB CLI (from skills-pool/codekb/)
+# 方式一：npm 全局安装（推荐）
+npm install -g @yun918/codekb
+
+# 方式二：从仓库源码本地安装（开发调试）
 cd skills-pool/codekb
+npm install
 npm install -g .
+
 codekb --help
 ```
 

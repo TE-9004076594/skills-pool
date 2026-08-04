@@ -15,7 +15,7 @@
 | 知识提取 | `codekb_extract` | 五类 LLM 提取器（pattern/decision/rule/convention/bug-pattern） |
 | 知识审阅 | `codekb_review` | confirm / reject / edit，confidence 管理 |
 | 编码约定 | `codekb_conventions` | 全局/领域约定查询 |
-| OpenSpec 集成 | `codekb extract --from-change` | archive 阶段知识反哺 |
+| OpenSpec 集成 | `codekb extract --from-change` | archive 阶段知识反哺（可选，见下方解耦说明） |
 
 ## 安装
 
@@ -102,6 +102,21 @@ npm view @yun918/codekb   # 发布后验证 registry 可见
 npx skills add https://github.com/TE-9004076594/skills-pool/tree/main/codekb --all
 ```
 
+安装后共 7 个技能：6 个 `codekb-*` + 1 个 `openspec-codekb-integration`。
+
+## OpenSpec 关联（解耦设计）
+
+CodeKB 与 OpenSpec 是**解耦**的：
+
+- **未安装 CodeKB**：`openspec-*` 技能 + CodeGraph 完全独立工作，不涉及 CodeKB
+- **安装 CodeKB 并初始化后**：通过 `openspec-codekb-integration` 技能获得各阶段语义增强
+  - `/opsx:explore` — 知识概览注入
+  - `/opsx:propose` — 约束关联（confidence ≥ 0.7）
+  - `/opsx:apply` — 按需知识查询
+  - `/opsx:archive` — 知识反哺（`codekb extract --from-change`）
+  - `/opsx:android-bug` — Bug Pattern 检索
+- 无论是否安装 CodeKB，OpenSpec 工作流都不会被阻塞
+
 ## CLI 命令
 
 ```bash
@@ -128,7 +143,7 @@ codekb/
 │   ├── extract/            # 五类知识提取器
 │   ├── knowledge/          # 知识条目存储（Markdown + YAML）
 │   └── mcp/server.js       # MCP Server（SDK 可选，JSON-RPC 降级）
-├── skills/                 # codekb-* 技能（SKILL.md）
+├── skills/                 # 7 个技能（6 codekb-* + openspec-codekb-integration）
 └── package.json
 ```
 

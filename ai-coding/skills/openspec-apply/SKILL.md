@@ -91,26 +91,6 @@ Implement tasks from an OpenSpec change.
 
    > The codegraph context helps ground implementation in the actual codebase structure, reducing the risk of breaking integrations.
 
-6b. **Query CodeKB knowledge on demand** (if CodeKB is initialized)
-
-   During implementation, use CodeKB to respect design constraints and conventions:
-
-   ```bash
-   # Retrieve constraints for the affected module before writing code
-   codekb_search("<module terms>", { knowledge_types: ["decision", "rule"] })
-   codekb_conventions("<affected domain>")
-
-   # Understand the symbol being modified — surface known issues before changing it
-   codekb_explain("<symbol being modified>")
-   ```
-
-   **When to query**:
-   - Before implementing a behavior change — check for related business rules and design decisions
-   - Before modifying a symbol with `known_issues` — verify the historical bug pattern still applies
-   - When a task's acceptance criteria seem to conflict with existing conventions — confirm via `codekb_ask`
-
-   **Commit-triggered sync**: after each commit, CodeKB's Git hook automatically updates the index and marks affected knowledge as `potentially_stale` (no manual action needed).
-
 7. **Set up Git branch for reviewability**
 
    Changes produced by apply should be reviewable and traceable. Before editing code:

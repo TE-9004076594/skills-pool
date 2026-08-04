@@ -106,35 +106,6 @@ Think freely. When insights crystallize, you might offer:
 
 **CodeGraph is especially valuable here** — even without an existing change, you can explore the codebase to understand current architecture, find integration points, and ground the discussion in real code.
 
-## CodeKB Knowledge Awareness
-
-If CodeKB is initialized (`codekb/` directory exists), enrich exploration with semantic project knowledge — the "why" behind the code:
-
-```bash
-# Check CodeKB status first
-codekb status
-
-# Get project knowledge overview (architecture patterns, design decisions, conventions)
-codekb_search("项目整体架构", { knowledge_types: ["pattern", "decision"] })
-codekb_conventions()
-codekb_explain("<core module>")
-```
-
-**What CodeKB adds to explore**:
-- **Architecture pattern list** — event-driven / CQRS / Saga / layered (from pattern extractor)
-- **Design decision summaries** — why the module is structured this way (from decision extractor)
-- **Coding convention points** — error handling, naming, logging rules (from convention extractor)
-- **Business rule count** — how many rules constrain the domain (from rule extractor)
-- **Known bug patterns** — historical issues in the explored modules (from bug-pattern extractor)
-
-**Explore output should include** a knowledge overview when available:
-```
-"这个项目使用了事件驱动架构，包含 12 条设计决策、7 条业务规则。
- 关键约束：金额必须用 BigDecimal (decision-001)，跨服务操作走 Saga。"
-```
-
-**If CodeKB is unavailable**, rely on CodeGraph + code reading as before.
-
 ### When a change exists
 
 If the user mentions a change or you detect one is relevant:

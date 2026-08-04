@@ -60,23 +60,6 @@ When ready to implement, run /opsx:apply
 
    > The codegraph results will be used as context when creating the proposal, design, and task artifacts below.
 
-2b. **Associate CodeKB constraints** (if CodeKB is initialized)
-
-   Use CodeKB to retrieve design constraints and business rules the change must respect:
-
-   ```bash
-   codekb_search("<change scope terms>", { knowledge_types: ["decision", "rule"], scope: ["<affected module>"] })
-   codekb_conventions("<affected domain>")
-   ```
-
-   - **Only associate entries with `confidence ≥ 0.7`** — low-confidence knowledge must not guide design decisions
-   - **Parse `codekb:ref` references** in existing spec files:
-     ```html
-     <!-- codekb:ref decision-001 -->
-     ```
-   - **Constraint check**: detect conflicts between the proposal and existing knowledge (e.g., proposal uses `float` while `decision-001` mandates BigDecimal)
-   - **Add a "相关约束" section** to the proposal artifact referencing the knowledge entry IDs
-
 3. **Create the change directory**
    ```bash
    openspec new change "<name>"

@@ -96,26 +96,6 @@ Archive a completed change in the experimental workflow.
 
    > The codegraph snapshot is included in the archive summary to preserve context about what code was affected.
 
-6b. **Trigger CodeKB knowledge feedback** (if CodeKB is initialized and `auto_extract_on_archive` is enabled)
-
-   Archiving means the change is complete and verified — this is the ideal moment to distill new knowledge:
-
-   ```bash
-   # Check CodeKB status
-   codekb status
-
-   # Extract knowledge from the archived change (proposal, spec-delta, archive, affected code)
-   codekb extract --from-change "<name>"
-   ```
-
-   The extraction:
-   - Reads `proposal.md` / `design.md` / `spec-delta.md` / `archive.md` for new design decisions and rules
-   - Sets `source_change: <name>` on new entries for traceability
-   - Detects superseded decisions — if the change overturns an old decision, the old entry's status becomes `superseded` and links to the new one
-   - Validates `codekb:ref` references still hold after the change
-
-   **If CodeKB is not initialized**, skip this step (the change can still be archived normally).
-
 7. **Generate PR summary and optionally create PR**
 
    Archive is the final record of a change. Generate a pull-request-ready summary from the OpenSpec artifacts:
